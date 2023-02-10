@@ -1,4 +1,5 @@
 ﻿using APIRest.Data;
+using APIRest.Exceptions;
 using APIRest.Interfaces;
 using APIRest.Models;
 using APIRest.Requests;
@@ -15,7 +16,10 @@ namespace APIRest.Repositories
         }
         public async Task<Auto?> GetAutoAsync(int id)
         {
-            return contextDB.Autos.FirstOrDefault(p => p.Id == id);
+            var entity = contextDB.Autos.FirstOrDefault(p => p.Id == id);
+            if (entity == null)
+                throw new NotFoundException();
+            return entity;
         }
 
         public async Task<List<Auto>?> GetAutosAsync()
@@ -34,7 +38,7 @@ namespace APIRest.Repositories
         {
             var auto = contextDB.Autos.FirstOrDefault(p => p.Id == id);
             if (auto == null)
-                throw new Exception("Auto not found");
+                throw new NotFoundException();
             auto.Marca = request.Marca;
             auto.Modelo = request.Modelo;
             auto.Año = request.Año;
@@ -47,7 +51,7 @@ namespace APIRest.Repositories
         {
             var a = contextDB.Autos.FirstOrDefault(p => p.Id == id);
             if (a == null)
-                throw new Exception("Auto not found");
+                throw new NotFoundException();
 
             contextDB.Autos.Remove(a);
             contextDB.SaveChanges();

@@ -1,4 +1,5 @@
 using APIRest.Data;
+using APIRest.Exceptions;
 using APIRest.Interfaces;
 using APIRest.Repositories;
 using APIRest.Services;
@@ -30,7 +31,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.UseExceptionHandlerMiddleware();
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
