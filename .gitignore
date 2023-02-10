@@ -1,0 +1,8 @@
+﻿################################################################################
+# Este archivo .gitignore ha sido creado automáticamente por Microsoft(R) Visual Studio.
+################################################################################
+
+/.vs/APIRest
+/APIRest/bin/Debug/net7.0
+/APIRest/obj
+/APIRest/APIRest.csproj.user
